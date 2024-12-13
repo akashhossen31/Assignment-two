@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Controllers;
+
+
+class ProfileController extends Controller
+{
+    public function index($id)
+    {
+        $name = "Donald Trump";
+        $age = "75";
+        $data = [
+            'id' => $id,
+            'name' => $name,
+            'age' => $age,
+        ];
+
+        $cookieName = 'access_token';
+        $cookieValue = '123-XYZ';
+        $cookieMinutes = time() + 60;
+        $cookiePath = '/';
+        $cookieDomain = $_SERVER['SERVER_NAME'];
+        $cookieSecure = false;
+        $cookieHttpOnly = true;
+        $cookie = cookie( $cookieName, $cookieValue, $cookieMinutes, $cookiePath, $cookieDomain, $cookieSecure, $cookieHttpOnly);
+        return response()
+            ->json($data, 200)
+            ->cookie($cookie);
+    }
+}
